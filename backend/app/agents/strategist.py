@@ -1,12 +1,16 @@
 from datetime import datetime
+from textwrap import dedent
 from uuid import UUID
 
 from app.services.transactions_service import get_transactions
 from app.services.budgets_service import get_budgets
 from app.services.insights_service import create_insight
+from app.services.users_service import get_user
 from app.agents.gemini_client import run_gemini
 from app.agents.logger import log_agent_event
+from app.integrations.email_client import send_email
 from app.schemas.insights import InsightCreate
+
 
 
 class StrategistAgent:
@@ -105,6 +109,45 @@ Provide friendly, positive weekly financial advice (1-2 sentences).
         )
 
         created = create_insight(payload)
+
+        user_email = None
+        user_name = "there"
+        user_error = None
+        try:
+            user = get_user(user_id)
+            if user:
+                user_email = user.get("email")
+                user_name = user.get("full_name") or (
+                    user_email.split("@")[0] if user_email else "there"
+                )
+        except Exception as exc:
+            user_error = str(exc)
+
+        email_status = {"sent": False, "error": None}
+        if user_error:
+            email_status["error"] = f"Unable to fetch user: {user_error}"
+        elif not user_email:
+            email_status["error"] = "No user email on file"
+        else:
+            subject = "Your Finex Weekly Spending Tip"
+            body = dedent(
+                f"""
+                Hi {user_name},
+
+                Here's your latest Finex summary:
+                - Monthly budget: ${total_budget:,.2f}
+                - Spent so far: ${spent_this_month:,.2f}
+
+                Insight:
+                {advice}
+
+                Keep building great habits!
+                """
+            ).strip()
+
+            sent, error = send_email(user_email, subject, body)
+            email_status = {"sent": sent, "error": error}
+
         log_agent_event(
             user_id,
             "Strategist",
@@ -113,6 +156,10 @@ Provide friendly, positive weekly financial advice (1-2 sentences).
                 "spent_this_month": spent_this_month,
                 "total_budget": total_budget,
             },
-            output_data={"insight": created},
+            output_data={"insight": created, "email_status": email_status},
         )
-        return {"message": "Weekly insight stored.", "insight": created}
+        return {
+            "message": "Weekly insight stored.",
+            "insight": created,
+            "email_status": email_status,
+        }
