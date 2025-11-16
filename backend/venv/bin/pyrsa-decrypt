@@ -1,4 +1,4 @@
-#!/Users/taewookim/project/finex-w25/backend/venv/bin/python3.13
+#!/Users/duduru/Desktop/Projects/finex-w25/backend/venv/bin/python3.11
 # -*- coding: utf-8 -*-
 import re
 import sys
