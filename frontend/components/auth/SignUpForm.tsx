@@ -3,7 +3,11 @@
 import { useState, type FormEvent, type ComponentProps } from "react";
 import { useRouter } from "next/navigation";
 import { auth } from "@/lib/firebaseClient";
-import { createUserWithEmailAndPassword } from "firebase/auth";
+import {
+  createUserWithEmailAndPassword,
+  GoogleAuthProvider,
+  signInWithPopup,
+} from "firebase/auth";
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -26,6 +30,7 @@ export function SignupForm({ ...props }: React.ComponentProps<typeof Card>) {
   const [password, onChangePassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [error, setError] = useState<string | null>(null);
+  const provider = new GoogleAuthProvider();
 
   function letSignUp(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -41,6 +46,22 @@ export function SignupForm({ ...props }: React.ComponentProps<typeof Card>) {
         const user = userCredential.user;
         console.log(user);
         router.push("/login");
+      })
+      .catch((error) => {
+        const errorMessage = error.message;
+        console.log(errorMessage);
+        setError(errorMessage);
+      });
+  }
+
+  function letGoogleSignUp() {
+    setError(null);
+
+    signInWithPopup(auth, provider)
+      .then((result) => {
+        const user = result.user;
+        console.log("google login good", user);
+        router.push("/dashboard");
       })
       .catch((error) => {
         const errorMessage = error.message;
@@ -111,7 +132,11 @@ export function SignupForm({ ...props }: React.ComponentProps<typeof Card>) {
             <FieldGroup>
               <Field>
                 <Button type="submit">Create Account</Button>
-                <Button variant="outline" type="button">
+                <Button
+                  variant="outline"
+                  type="button"
+                  onClick={letGoogleSignUp}
+                >
                   Sign up with Google
                 </Button>
                 <FieldDescription className="px-6 text-center">

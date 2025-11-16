@@ -3,7 +3,11 @@
 import { useState, type FormEvent } from "react";
 import { useRouter } from "next/navigation";
 import { auth } from "@/lib/firebaseClient";
-import { signInWithEmailAndPassword } from "firebase/auth";
+import {
+  signInWithEmailAndPassword,
+  GoogleAuthProvider,
+  signInWithPopup,
+} from "firebase/auth";
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -22,6 +26,7 @@ export default function LoginForm() {
   const [email, onChangeEmail] = useState("");
   const [password, onChangePassword] = useState("");
   const [error, setError] = useState<string | null>(null);
+  const provider = new GoogleAuthProvider();
 
   function letLogin(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -31,6 +36,22 @@ export default function LoginForm() {
       .then((userCredential) => {
         const user = userCredential.user;
         console.log("good", user);
+        router.push("/dashboard");
+      })
+      .catch((error) => {
+        const errorMessage = error.message;
+        console.log(errorMessage);
+        setError(errorMessage);
+      });
+  }
+
+  function letGoogleLogin() {
+    setError(null);
+
+    signInWithPopup(auth, provider)
+      .then((result) => {
+        const user = result.user;
+        console.log("google login good", user);
         router.push("/dashboard");
       })
       .catch((error) => {
@@ -102,7 +123,12 @@ export default function LoginForm() {
           </form>
         </CardContent>
         <CardFooter className="flex-col gap-2">
-          <Button variant="outline" className="w-full" type="button">
+          <Button
+            variant="outline"
+            className="w-full"
+            type="button"
+            onClick={letGoogleLogin}
+          >
             Login with Google
           </Button>
         </CardFooter>
