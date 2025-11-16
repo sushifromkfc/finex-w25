@@ -33,10 +33,11 @@ export default function Home({
   onRefresh,
 }: Props) {
   const monthKey = new Date().toISOString().slice(0, 7);
-  const todayLabel = new Date().toLocaleDateString(undefined, {
+  const todayLabel = new Date().toLocaleDateString("en-CA", {
     month: "short",
     day: "2-digit",
     year: "numeric",
+    timeZone: "UTC",
   });
 
   const dateParts = (value?: string) => {
@@ -49,7 +50,7 @@ export default function Home({
     const { month, day, year } = dateParts(value);
     if (!month || !day || !year) return "--";
     return new Date(Date.UTC(year, month - 1, day)).toLocaleDateString(
-      undefined,
+      "en-CA", // <-- 여기서도 locale 고정
       {
         month: "short",
         day: "2-digit",
@@ -124,7 +125,7 @@ export default function Home({
               Overview
             </p>
             <h1 className="text-3xl font-bold mt-1 text-slate-900">
-              Hi, {user?.full_name || "Finex member"}. It's {todayLabel}.
+              Hi, {user?.full_name || "Finex member"}. It&apos;s {todayLabel}.
             </h1>
             <p className="text-slate-600 text-sm mt-2 max-w-lg">
               {latestInsight
@@ -142,26 +143,24 @@ export default function Home({
                 / ${spentThisMonth.toFixed(2)}
               </span>
             </p>
-            <p className="text-xs text-emerald-500 mt-1">
-              <div className="mt-1">
-                <p className="text-xs text-emerald-500">
-                  {budgetRemaining > 0 ? "On track" : "Budget exceeded"}
-                </p>
 
-                <div className="mt-3">
-                  <div className="h-2 w-full rounded-full bg-slate-200 overflow-hidden">
-                    <div
-                      className={`h-full transition-all duration-700 ease-out ${usageColor}`}
-                      style={{ width: `${budgetUsagePercent}%` }}
-                    />
-                  </div>
-                  <p className="text-xs text-slate-500 mt-1">
-                    {budgetUsagePercent.toFixed(0)}% used
-                  </p>
+            {/* 에러 나던 부분 수정 */}
+            <div className="mt-1">
+              <p className="text-xs text-emerald-500">
+                {budgetRemaining > 0 ? "On track" : "Budget exceeded"}
+              </p>
+              <div className="mt-3">
+                <div className="h-2 w-full rounded-full bg-slate-200 overflow-hidden">
+                  <div
+                    className={`h-full transition-all duration-700 ease-out ${usageColor}`}
+                    style={{ width: `${budgetUsagePercent}%` }}
+                  />
                 </div>
+                <p className="text-xs text-slate-500 mt-1">
+                  {budgetUsagePercent.toFixed(0)}% used
+                </p>
               </div>
-              {budgetRemaining > 0 ? "On track" : "Budget exceeded"}
-            </p>
+            </div>
           </div>
         </div>
       </div>
