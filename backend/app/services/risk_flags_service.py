@@ -8,7 +8,7 @@ def get_risk_flags(user_id: UUID):
         supabase.table("risk_flags")
         .select("*")
         .eq("user_id", str(user_id))
-        .order("created_at", desc=True)
+        .order("id", desc=True)
         .execute()
     )
     return resp.data

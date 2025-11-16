@@ -7,9 +7,13 @@ import Statistics from "@/components/for_dashboard/statistics";
 import Profile from "@/components/for_dashboard/profile";
 import Setting from "@/components/for_dashboard/setting";
 import Month from "@/components/for_dashboard/month";
+import { useFinexData } from "@/hooks/use-finex-data";
 
 export default function DashboardPage() {
   const [activeTab, setActiveTab] = useState("home");
+  const defaultUserId = process.env.NEXT_PUBLIC_DEFAULT_USER_ID;
+  const { user, transactions, budgets, insights, riskFlags, loading, error, refresh } =
+    useFinexData(defaultUserId);
 
   return (
     <div className="relative min-h-screen flex bg-gradient-to-br from-sky-50 via-sky-100 to-sky-200 text-slate-900">
@@ -25,11 +29,26 @@ export default function DashboardPage() {
 
       {/* 메인 컨텐츠 */}
       <div className="relative z-10 flex-1 ml-28 p-6 transition-all duration-500 ease-out">
-        {activeTab === "home" && <Home />}
-        {activeTab === "statistics" && <Statistics />}
-        {activeTab === "profile" && <Profile />}
-        {activeTab === "settings" && <Setting />}
-        {activeTab === "calendar" && <Month />}
+        {activeTab === "home" && (
+          <Home
+            user={user}
+            transactions={transactions}
+            budgets={budgets}
+            insights={insights}
+            riskFlags={riskFlags}
+            loading={loading}
+            error={error}
+            onRefresh={refresh}
+          />
+        )}
+        {activeTab === "statistics" && (
+          <Statistics transactions={transactions} loading={loading} error={error} />
+        )}
+        {activeTab === "profile" && <Profile user={user} budgets={budgets} />}
+        {activeTab === "settings" && (
+          <Setting budgets={budgets} userId={user?.id} onBudgetsChanged={refresh} />
+        )}
+        {activeTab === "calendar" && <Month transactions={transactions} />}
       </div>
     </div>
   );

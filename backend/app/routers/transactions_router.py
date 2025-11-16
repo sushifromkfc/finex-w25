@@ -1,4 +1,4 @@
-from fastapi import APIRouter, HTTPException
+from fastapi import APIRouter, HTTPException, BackgroundTasks
 from typing import List
 from uuid import UUID
 
@@ -7,6 +7,7 @@ from app.services.transactions_service import (
     create_transaction,
 )
 from app.schemas.transactions import Transaction, TransactionCreate
+from app.notifications.transaction_email import send_transaction_email_summary
 
 router = APIRouter(prefix="/transactions", tags=["transactions"])
 
@@ -20,8 +21,14 @@ def read_transactions(user_id: UUID):
 
 
 @router.post("/", response_model=Transaction)
-def new_transaction(payload: TransactionCreate):
+def new_transaction(payload: TransactionCreate, background_tasks: BackgroundTasks):
     try:
-        return create_transaction(payload)
+        created = create_transaction(payload)
+        background_tasks.add_task(
+            send_transaction_email_summary,
+            payload.user_id,
+            created,
+        )
+        return created
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))

@@ -1,10 +1,10 @@
 from pydantic import BaseModel
 from uuid import UUID
 from datetime import date, datetime
-from typing import Optional, Any
+from typing import Optional, Any, Union
 
 class Transaction(BaseModel):
-    id: UUID
+    id: Union[UUID, str, int]
     user_id: UUID
     date: date
     name: str
