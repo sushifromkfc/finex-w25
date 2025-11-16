@@ -2,3 +2,6 @@ fastapi
 supabase
 python-dotenv
 uvicorn[standard]
+
+# cd backend
+# pip install -r requirements.txt
