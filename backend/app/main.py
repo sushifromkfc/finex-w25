@@ -9,6 +9,7 @@ from app.routers.risk_flags_router import router as risk_flags_router
 from app.routers.insights_router import router as insights_router
 from app.routers.action_plans_router import router as action_plans_router
 from app.routers.agent_logs_router import router as agent_logs_router
+from app.routers.agent_router import router as agent_router
 
 
 app = FastAPI(
@@ -46,3 +47,4 @@ app.include_router(risk_flags_router)
 app.include_router(insights_router)
 app.include_router(action_plans_router)
 app.include_router(agent_logs_router)
+app.include_router(agent_router)

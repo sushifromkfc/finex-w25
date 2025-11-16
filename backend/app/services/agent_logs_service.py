@@ -17,7 +17,7 @@ def get_agent_logs(user_id: UUID):
 def create_agent_log(payload: AgentLogCreate):
     resp = (
         supabase.table("agent_logs")
-        .insert(payload.dict())
+        .insert(payload.model_dump(mode="json"))
         .execute()
     )
     return resp.data[0]

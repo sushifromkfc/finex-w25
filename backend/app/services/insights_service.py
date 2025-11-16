@@ -17,7 +17,7 @@ def get_insights(user_id: UUID):
 def create_insight(payload: InsightCreate):
     resp = (
         supabase.table("insights")
-        .insert(payload.dict())
+        .insert(payload.model_dump(mode="json"))
         .execute()
     )
     return resp.data[0]

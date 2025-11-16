@@ -5,6 +5,8 @@ from app.services.transactions_service import get_transactions
 from app.services.budgets_service import get_budgets
 from app.services.insights_service import create_insight
 from app.agents.gemini_client import run_gemini
+from app.agents.logger import log_agent_event
+from app.schemas.insights import InsightCreate
 
 
 class StrategistAgent:
@@ -21,6 +23,14 @@ class StrategistAgent:
             return {"message": "No transactions for strategist."}
 
         latest = transactions[-1]  # most recent transaction
+
+        related_transaction_ids = None
+        latest_id = latest.get("id")
+        if latest_id is not None:
+            try:
+                related_transaction_ids = [UUID(str(latest_id))]
+            except (ValueError, TypeError):
+                related_transaction_ids = None
 
         spent_this_month = sum(
             t["amount"] for t in transactions
@@ -45,14 +55,14 @@ Generate one short, friendly, helpful financial advice sentence.
 
         text = run_gemini(prompt)
 
-        payload = {
-            "user_id": str(user_id),
-            "type": "realtime_advice",
-            "title": "Transaction Advice",
-            "description": text,
-            "severity": 1,
-            "related_transaction_ids": [latest["id"]]
-        }
+        payload = InsightCreate(
+            user_id=user_id,
+            type="realtime_advice",
+            title="Transaction Advice",
+            description=text,
+            severity=1,
+            related_transaction_ids=related_transaction_ids,
+        )
 
         created = create_insight(payload)
         return {"message": "Realtime advice stored.", "insight": created}
@@ -86,14 +96,23 @@ Provide friendly, positive weekly financial advice (1-2 sentences).
 
         advice = run_gemini(prompt)
 
-        payload = {
-            "user_id": str(user_id),
-            "type": "weekly_advice",
-            "title": "Weekly Financial Insight",
-            "description": advice,
-            "severity": 1,
-            "related_transaction_ids": None
-        }
+        payload = InsightCreate(
+            user_id=user_id,
+            type="weekly_advice",
+            title="Weekly Financial Insight",
+            description=advice,
+            severity=1,
+        )
 
         created = create_insight(payload)
+        log_agent_event(
+            user_id,
+            "Strategist",
+            input_data={
+                "stage": "weekly",
+                "spent_this_month": spent_this_month,
+                "total_budget": total_budget,
+            },
+            output_data={"insight": created},
+        )
         return {"message": "Weekly insight stored.", "insight": created}

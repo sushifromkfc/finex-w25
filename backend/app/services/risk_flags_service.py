@@ -17,7 +17,7 @@ def get_risk_flags(user_id: UUID):
 def create_risk_flag(payload: RiskFlagCreate):
     resp = (
         supabase.table("risk_flags")
-        .insert(payload.dict())
+        .insert(payload.model_dump(mode="json"))
         .execute()
     )
     return resp.data[0]

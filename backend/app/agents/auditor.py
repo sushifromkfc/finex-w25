@@ -5,6 +5,7 @@ from uuid import UUID
 from app.services.transactions_service import get_transactions
 from app.services.risk_flags_service import create_risk_flag
 from app.agents.gemini_client import run_gemini
+from app.schemas.risk_flags import RiskFlagCreate
 
 
 class AuditorAgent:
@@ -62,11 +63,11 @@ If no risk flags exist, return an empty list [].
         # Store in DB
         stored = []
         for flag in risk_flags:
-            payload = {
-                "user_id": str(user_id),
-                "flag_type": flag["flag_type"],
-                "details": flag["details"]
-            }
+            payload = RiskFlagCreate(
+                user_id=user_id,
+                flag_type=flag.get("flag_type", "unknown"),
+                details=flag.get("details"),
+            )
             created = create_risk_flag(payload)
             stored.append(created)
 
