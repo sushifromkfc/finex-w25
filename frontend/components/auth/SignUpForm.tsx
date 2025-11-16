@@ -23,8 +23,9 @@ import {
   FieldLabel,
 } from "@/components/ui/field";
 import { Input } from "@/components/ui/input";
+import { motion } from "framer-motion";
 
-export function SignupForm({ ...props }: React.ComponentProps<typeof Card>) {
+export function SignupForm({ ...props }: ComponentProps<typeof Card>) {
   const router = useRouter();
   const [email, onChangeEmail] = useState("");
   const [password, onChangePassword] = useState("");
@@ -71,89 +72,104 @@ export function SignupForm({ ...props }: React.ComponentProps<typeof Card>) {
   }
 
   return (
-    <Card {...props}>
-      <CardHeader>
-        <CardTitle>Create an account</CardTitle>
-        <CardDescription>
-          Enter your information below to create your account
-        </CardDescription>
-      </CardHeader>
-      <CardContent>
-        <form onSubmit={letSignUp}>
-          <FieldGroup>
-            <Field>
-              <FieldLabel htmlFor="email">Email</FieldLabel>
-              <Input
-                id="email"
-                type="email"
-                placeholder="m@example.com"
-                required
-                value={email}
-                onChange={(e) => onChangeEmail(e.target.value)}
-              />
-              <FieldDescription>
-                We&apos;ll use this to contact you. We will not share your email
-                with anyone else.
-              </FieldDescription>
-            </Field>
-            <Field>
-              <FieldLabel htmlFor="password">Password</FieldLabel>
-              <Input
-                id="password"
-                type="password"
-                required
-                value={password}
-                onChange={(e) => onChangePassword(e.target.value)}
-              />
-              <FieldDescription>
-                Must be at least 8 characters long.
-              </FieldDescription>
-            </Field>
-            <Field>
-              <FieldLabel htmlFor="confirm-password">
-                Confirm Password
-              </FieldLabel>
-              <Input
-                id="confirm-password"
-                type="password"
-                required
-                value={confirmPassword}
-                onChange={(e) => setConfirmPassword(e.target.value)}
-              />
-              <FieldDescription>Please confirm your password.</FieldDescription>
-            </Field>
+    <motion.div
+      initial={{ opacity: 0, y: 16, scale: 0.96 }}
+      animate={{ opacity: 1, y: 0, scale: 1 }}
+      transition={{ duration: 0.35, ease: "easeOut" }}
+      className="w-full max-w-md"
+    >
+      <Card
+        {...props}
+        className={`relative w-full overflow-hidden border border-white/60 bg-white/70 shadow-2xl backdrop-blur-xl ${
+          props.className ?? ""
+        }`}
+      >
+        <div className="pointer-events-none absolute inset-x-10 -top-20 h-32 rounded-full bg-gradient-to-br from-sky-200/60 to-indigo-200/60 blur-3xl" />
 
-            {error && (
-              <p className="text-xs text-red-600 whitespace-pre-line">
-                {error}
-              </p>
-            )}
+        <CardHeader className="relative pb-4">
+          <CardTitle className="text-2xl">Create an account</CardTitle>
+          <CardDescription>
+            Enter your information below to create your account
+          </CardDescription>
+        </CardHeader>
 
+        <CardContent className="relative pb-4">
+          <form onSubmit={letSignUp}>
             <FieldGroup>
               <Field>
-                <Button type="submit">Create Account</Button>
-                <Button
-                  variant="outline"
-                  type="button"
-                  onClick={letGoogleSignUp}
-                >
-                  Sign up with Google
-                </Button>
-                <FieldDescription className="px-6 text-center">
-                  Already have an account?
-                  <Button
-                    variant="link"
-                    type="button"
-                    onClick={() => router.push("/login")}
-                  >
-                    Sign in
-                  </Button>
-                </FieldDescription>
+                <FieldLabel>Email</FieldLabel>
+                <Input
+                  type="email"
+                  placeholder="m@example.com"
+                  required
+                  value={email}
+                  onChange={(e) => onChangeEmail(e.target.value)}
+                />
               </Field>
+
+              <Field>
+                <FieldLabel>Password</FieldLabel>
+                <Input
+                  type="password"
+                  required
+                  value={password}
+                  onChange={(e) => onChangePassword(e.target.value)}
+                />
+              </Field>
+
+              <Field>
+                <FieldLabel>Confirm Password</FieldLabel>
+                <Input
+                  type="password"
+                  required
+                  value={confirmPassword}
+                  onChange={(e) => setConfirmPassword(e.target.value)}
+                />
+              </Field>
+
+              {error && (
+                <motion.p
+                  initial={{ opacity: 0, y: -4 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  className="text-xs text-red-600 whitespace-pre-line"
+                >
+                  {error}
+                </motion.p>
+              )}
+
+              <FieldGroup>
+                <Field>
+                  <div className="mt-3 flex flex-col gap-3">
+                    <Button className="h-10 w-full rounded-full bg-gradient-to-r from-sky-500 to-indigo-500 text-white">
+                      Create Account
+                    </Button>
+                    <Button
+                      variant="outline"
+                      type="button"
+                      onClick={letGoogleSignUp}
+                      className="h-10 w-full rounded-full"
+                    >
+                      Sign up with Google
+                    </Button>
+
+                    <FieldDescription className="pt-1 text-center text-xs">
+                      Already have an account?
+                      <Button
+                        variant="link"
+                        type="button"
+                        onClick={() => router.push("/login")}
+                        className="px-1 text-xs text-sky-600"
+                      >
+                        Sign in
+                      </Button>
+                    </FieldDescription>
+                  </div>
+                </Field>
+              </FieldGroup>
             </FieldGroup>
-          </FieldGroup>
-        </form>
-      </CardContent>
-    </Card>
+          </form>
+        </CardContent>
+      </Card>
+    </motion.div>
   );
 }
