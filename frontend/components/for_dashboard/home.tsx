@@ -143,16 +143,22 @@ export default function Home({
               </span>
             </p>
             <p className="text-xs text-emerald-500 mt-1">
-              <div className="mt-3">
-                <div className="h-2 w-full rounded-full bg-slate-200 overflow-hidden">
-                  <div
-                    className={`h-full transition-all duration-700 ease-out ${usageColor}`}
-                    style={{ width: `${budgetUsagePercent}%` }}
-                  />
-                </div>
-                <p className="text-xs text-slate-500 mt-1">
-                  {budgetUsagePercent.toFixed(0)}% used
+              <div className="mt-1">
+                <p className="text-xs text-emerald-500">
+                  {budgetRemaining > 0 ? "On track" : "Budget exceeded"}
                 </p>
+
+                <div className="mt-3">
+                  <div className="h-2 w-full rounded-full bg-slate-200 overflow-hidden">
+                    <div
+                      className={`h-full transition-all duration-700 ease-out ${usageColor}`}
+                      style={{ width: `${budgetUsagePercent}%` }}
+                    />
+                  </div>
+                  <p className="text-xs text-slate-500 mt-1">
+                    {budgetUsagePercent.toFixed(0)}% used
+                  </p>
+                </div>
               </div>
               {budgetRemaining > 0 ? "On track" : "Budget exceeded"}
             </p>
