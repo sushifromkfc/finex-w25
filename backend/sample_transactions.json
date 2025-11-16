@@ -1,0 +1,1202 @@
+[
+  {
+    "id": 62,
+    "date": "2025-09-01",
+    "name": "Spotify",
+    "amount": 11.12,
+    "category": "Subscriptions",
+    "is_subscription": true
+  },
+  {
+    "id": 9,
+    "date": "2025-09-01",
+    "name": "Starbucks",
+    "amount": 13.77,
+    "category": "Dining",
+    "is_subscription": false
+  },
+  {
+    "id": 40,
+    "date": "2025-09-02",
+    "name": "Netflix",
+    "amount": 16.73,
+    "category": "Subscriptions",
+    "is_subscription": true
+  },
+  {
+    "id": 6,
+    "date": "2025-09-04",
+    "name": "Best Buy",
+    "amount": 151.47,
+    "category": "Electronics",
+    "is_subscription": false
+  },
+  {
+    "id": 64,
+    "date": "2025-09-05",
+    "name": "Trader Joe's",
+    "amount": 33.15,
+    "category": "Groceries",
+    "is_subscription": false
+  },
+  {
+    "id": 93,
+    "date": "2025-09-06",
+    "name": "Costco",
+    "amount": 78.04,
+    "category": "Groceries",
+    "is_subscription": false
+  },
+  {
+    "id": 71,
+    "date": "2025-09-07",
+    "name": "Netflix",
+    "amount": 14.24,
+    "category": "Subscriptions",
+    "is_subscription": true
+  },
+  {
+    "id": 111,
+    "date": "2025-09-07",
+    "name": "Spotify",
+    "amount": 10.9,
+    "category": "Subscriptions",
+    "is_subscription": true
+  },
+  {
+    "id": 63,
+    "date": "2025-09-08",
+    "name": "Apple",
+    "amount": 110.89,
+    "category": "Electronics",
+    "is_subscription": false
+  },
+  {
+    "id": 26,
+    "date": "2025-09-08",
+    "name": "Apple",
+    "amount": 344.76,
+    "category": "Electronics",
+    "is_subscription": false
+  },
+  {
+    "id": 80,
+    "date": "2025-09-08",
+    "name": "Starbucks",
+    "amount": 9.31,
+    "category": "Dining",
+    "is_subscription": false
+  },
+  {
+    "id": 90,
+    "date": "2025-09-09",
+    "name": "Costco",
+    "amount": 74.95,
+    "category": "Groceries",
+    "is_subscription": false
+  },
+  {
+    "id": 132,
+    "date": "2025-09-09",
+    "name": "Delta Airlines",
+    "amount": 334.5,
+    "category": "Travel",
+    "is_subscription": false
+  },
+  {
+    "id": 60,
+    "date": "2025-09-09",
+    "name": "Trader Joe's",
+    "amount": 27.42,
+    "category": "Groceries",
+    "is_subscription": false
+  },
+  {
+    "id": 143,
+    "date": "2025-09-09",
+    "name": "Trader Joe's",
+    "amount": 96.66,
+    "category": "Groceries",
+    "is_subscription": false
+  },
+  {
+    "id": 17,
+    "date": "2025-09-09",
+    "name": "Uber",
+    "amount": 47.05,
+    "category": "Transport",
+    "is_subscription": false
+  },
+  {
+    "id": 22,
+    "date": "2025-09-10",
+    "name": "Costco",
+    "amount": 199.7,
+    "category": "Groceries",
+    "is_subscription": false
+  },
+  {
+    "id": 98,
+    "date": "2025-09-10",
+    "name": "Whole Foods",
+    "amount": 92.29,
+    "category": "Groceries",
+    "is_subscription": false
+  },
+  {
+    "id": 52,
+    "date": "2025-09-11",
+    "name": "Canva",
+    "amount": 16.9,
+    "category": "Software",
+    "is_subscription": true
+  },
+  {
+    "id": 146,
+    "date": "2025-09-12",
+    "name": "Tesla Service",
+    "amount": 1820.45,
+    "category": "Auto",
+    "is_subscription": false
+  },
+  {
+    "id": 35,
+    "date": "2025-09-12",
+    "name": "Uber",
+    "amount": 57.64,
+    "category": "Transport",
+    "is_subscription": false
+  },
+  {
+    "id": 69,
+    "date": "2025-09-13",
+    "name": "DoorDash",
+    "amount": 39.01,
+    "category": "Dining",
+    "is_subscription": false
+  },
+  {
+    "id": 19,
+    "date": "2025-09-13",
+    "name": "Home Depot",
+    "amount": 126.17,
+    "category": "Home",
+    "is_subscription": false
+  },
+  {
+    "id": 12,
+    "date": "2025-09-13",
+    "name": "Shell",
+    "amount": 85.09,
+    "category": "Gas",
+    "is_subscription": false
+  },
+  {
+    "id": 106,
+    "date": "2025-09-14",
+    "name": "Amazon",
+    "amount": 72.89,
+    "category": "Shopping",
+    "is_subscription": false
+  },
+  {
+    "id": 3,
+    "date": "2025-09-14",
+    "name": "Best Buy",
+    "amount": 99.99,
+    "category": "Electronics",
+    "is_subscription": false
+  },
+  {
+    "id": 107,
+    "date": "2025-09-14",
+    "name": "Best Buy",
+    "amount": 131.51,
+    "category": "Electronics",
+    "is_subscription": false
+  },
+  {
+    "id": 127,
+    "date": "2025-09-14",
+    "name": "Home Depot",
+    "amount": 310.37,
+    "category": "Home",
+    "is_subscription": false
+  },
+  {
+    "id": 135,
+    "date": "2025-09-15",
+    "name": "Delta Airlines",
+    "amount": 258.57,
+    "category": "Travel",
+    "is_subscription": false
+  },
+  {
+    "id": 1,
+    "date": "2025-09-15",
+    "name": "Whole Foods",
+    "amount": 127.69,
+    "category": "Groceries",
+    "is_subscription": false
+  },
+  {
+    "id": 144,
+    "date": "2025-09-16",
+    "name": "Lyft",
+    "amount": 33.31,
+    "category": "Transport",
+    "is_subscription": false
+  },
+  {
+    "id": 113,
+    "date": "2025-09-17",
+    "name": "Delta Airlines",
+    "amount": 251.1,
+    "category": "Travel",
+    "is_subscription": false
+  },
+  {
+    "id": 97,
+    "date": "2025-09-17",
+    "name": "Lyft",
+    "amount": 31.12,
+    "category": "Transport",
+    "is_subscription": false
+  },
+  {
+    "id": 31,
+    "date": "2025-09-18",
+    "name": "Apple",
+    "amount": 320.95,
+    "category": "Electronics",
+    "is_subscription": false
+  },
+  {
+    "id": 116,
+    "date": "2025-09-20",
+    "name": "Best Buy",
+    "amount": 76.57,
+    "category": "Electronics",
+    "is_subscription": false
+  },
+  {
+    "id": 47,
+    "date": "2025-09-20",
+    "name": "Shell",
+    "amount": 79.56,
+    "category": "Gas",
+    "is_subscription": false
+  },
+  {
+    "id": 36,
+    "date": "2025-09-20",
+    "name": "Starbucks",
+    "amount": 15.09,
+    "category": "Dining",
+    "is_subscription": false
+  },
+  {
+    "id": 43,
+    "date": "2025-09-21",
+    "name": "Gym Membership",
+    "amount": 35.1,
+    "category": "Fitness",
+    "is_subscription": true
+  },
+  {
+    "id": 124,
+    "date": "2025-09-23",
+    "name": "DoorDash",
+    "amount": 23.19,
+    "category": "Dining",
+    "is_subscription": false
+  },
+  {
+    "id": 73,
+    "date": "2025-09-25",
+    "name": "Best Buy",
+    "amount": 266.36,
+    "category": "Electronics",
+    "is_subscription": false
+  },
+  {
+    "id": 131,
+    "date": "2025-09-25",
+    "name": "Home Depot",
+    "amount": 141.76,
+    "category": "Home",
+    "is_subscription": false
+  },
+  {
+    "id": 57,
+    "date": "2025-09-26",
+    "name": "Lyft",
+    "amount": 28.56,
+    "category": "Transport",
+    "is_subscription": false
+  },
+  {
+    "id": 120,
+    "date": "2025-09-27",
+    "name": "Apple",
+    "amount": 296.75,
+    "category": "Electronics",
+    "is_subscription": false
+  },
+  {
+    "id": 21,
+    "date": "2025-09-27",
+    "name": "Delta Airlines",
+    "amount": 488.8,
+    "category": "Travel",
+    "is_subscription": false
+  },
+  {
+    "id": 100,
+    "date": "2025-09-28",
+    "name": "Adobe",
+    "amount": 35.61,
+    "category": "Software",
+    "is_subscription": true
+  },
+  {
+    "id": 5,
+    "date": "2025-09-28",
+    "name": "Apple",
+    "amount": 246.66,
+    "category": "Electronics",
+    "is_subscription": false
+  },
+  {
+    "id": 66,
+    "date": "2025-09-28",
+    "name": "Best Buy",
+    "amount": 120.86,
+    "category": "Electronics",
+    "is_subscription": false
+  },
+  {
+    "id": 56,
+    "date": "2025-09-28",
+    "name": "Best Buy",
+    "amount": 407.42,
+    "category": "Electronics",
+    "is_subscription": false
+  },
+  {
+    "id": 28,
+    "date": "2025-09-28",
+    "name": "Southwest Airlines",
+    "amount": 500.55,
+    "category": "Travel",
+    "is_subscription": false
+  },
+  {
+    "id": 34,
+    "date": "2025-09-29",
+    "name": "Amazon",
+    "amount": 121.91,
+    "category": "Shopping",
+    "is_subscription": false
+  },
+  {
+    "id": 130,
+    "date": "2025-09-30",
+    "name": "Apple",
+    "amount": 97.34,
+    "category": "Electronics",
+    "is_subscription": false
+  },
+  {
+    "id": 65,
+    "date": "2025-10-01",
+    "name": "Delta Airlines",
+    "amount": 474.35,
+    "category": "Travel",
+    "is_subscription": false
+  },
+  {
+    "id": 91,
+    "date": "2025-10-01",
+    "name": "Home Depot",
+    "amount": 77.16,
+    "category": "Home",
+    "is_subscription": false
+  },
+  {
+    "id": 51,
+    "date": "2025-10-01",
+    "name": "Southwest Airlines",
+    "amount": 528.78,
+    "category": "Travel",
+    "is_subscription": false
+  },
+  {
+    "id": 78,
+    "date": "2025-10-01",
+    "name": "Starbucks",
+    "amount": 9.69,
+    "category": "Dining",
+    "is_subscription": false
+  },
+  {
+    "id": 123,
+    "date": "2025-10-01",
+    "name": "Starbucks",
+    "amount": 17.67,
+    "category": "Dining",
+    "is_subscription": false
+  },
+  {
+    "id": 2,
+    "date": "2025-10-02",
+    "name": "Apple",
+    "amount": 133.26,
+    "category": "Electronics",
+    "is_subscription": false
+  },
+  {
+    "id": 126,
+    "date": "2025-10-02",
+    "name": "Delta Airlines",
+    "amount": 250.05,
+    "category": "Travel",
+    "is_subscription": false
+  },
+  {
+    "id": 75,
+    "date": "2025-10-02",
+    "name": "Spotify",
+    "amount": 10.33,
+    "category": "Subscriptions",
+    "is_subscription": true
+  },
+  {
+    "id": 147,
+    "date": "2025-10-03",
+    "name": "MacBook Pro",
+    "amount": 2499.0,
+    "category": "Electronics",
+    "is_subscription": false
+  },
+  {
+    "id": 110,
+    "date": "2025-10-04",
+    "name": "Adobe",
+    "amount": 44.54,
+    "category": "Software",
+    "is_subscription": true
+  },
+  {
+    "id": 44,
+    "date": "2025-10-04",
+    "name": "Adobe",
+    "amount": 55.48,
+    "category": "Software",
+    "is_subscription": true
+  },
+  {
+    "id": 95,
+    "date": "2025-10-04",
+    "name": "Target",
+    "amount": 128.81,
+    "category": "Shopping",
+    "is_subscription": false
+  },
+  {
+    "id": 136,
+    "date": "2025-10-04",
+    "name": "Uber",
+    "amount": 17.75,
+    "category": "Transport",
+    "is_subscription": false
+  },
+  {
+    "id": 13,
+    "date": "2025-10-04",
+    "name": "Uber",
+    "amount": 50.68,
+    "category": "Transport",
+    "is_subscription": false
+  },
+  {
+    "id": 112,
+    "date": "2025-10-06",
+    "name": "Uber",
+    "amount": 12.19,
+    "category": "Transport",
+    "is_subscription": false
+  },
+  {
+    "id": 108,
+    "date": "2025-10-07",
+    "name": "Costco",
+    "amount": 106.34,
+    "category": "Groceries",
+    "is_subscription": false
+  },
+  {
+    "id": 18,
+    "date": "2025-10-08",
+    "name": "Spotify",
+    "amount": 11.57,
+    "category": "Subscriptions",
+    "is_subscription": true
+  },
+  {
+    "id": 84,
+    "date": "2025-10-08",
+    "name": "Target",
+    "amount": 175.15,
+    "category": "Shopping",
+    "is_subscription": false
+  },
+  {
+    "id": 46,
+    "date": "2025-10-09",
+    "name": "Adobe",
+    "amount": 49.36,
+    "category": "Software",
+    "is_subscription": true
+  },
+  {
+    "id": 96,
+    "date": "2025-10-11",
+    "name": "Apple",
+    "amount": 172.34,
+    "category": "Electronics",
+    "is_subscription": false
+  },
+  {
+    "id": 138,
+    "date": "2025-10-11",
+    "name": "DoorDash",
+    "amount": 51.1,
+    "category": "Dining",
+    "is_subscription": false
+  },
+  {
+    "id": 27,
+    "date": "2025-10-11",
+    "name": "Home Depot",
+    "amount": 123.0,
+    "category": "Home",
+    "is_subscription": false
+  },
+  {
+    "id": 29,
+    "date": "2025-10-11",
+    "name": "Target",
+    "amount": 126.59,
+    "category": "Shopping",
+    "is_subscription": false
+  },
+  {
+    "id": 86,
+    "date": "2025-10-11",
+    "name": "Uber",
+    "amount": 14.66,
+    "category": "Transport",
+    "is_subscription": false
+  },
+  {
+    "id": 49,
+    "date": "2025-10-12",
+    "name": "Canva",
+    "amount": 12.12,
+    "category": "Software",
+    "is_subscription": true
+  },
+  {
+    "id": 125,
+    "date": "2025-10-13",
+    "name": "DoorDash",
+    "amount": 60.51,
+    "category": "Dining",
+    "is_subscription": false
+  },
+  {
+    "id": 10,
+    "date": "2025-10-14",
+    "name": "Delta Airlines",
+    "amount": 248.41,
+    "category": "Travel",
+    "is_subscription": false
+  },
+  {
+    "id": 11,
+    "date": "2025-10-14",
+    "name": "Netflix",
+    "amount": 14.37,
+    "category": "Subscriptions",
+    "is_subscription": true
+  },
+  {
+    "id": 72,
+    "date": "2025-10-14",
+    "name": "Netflix",
+    "amount": 14.99,
+    "category": "Subscriptions",
+    "is_subscription": true
+  },
+  {
+    "id": 42,
+    "date": "2025-10-14",
+    "name": "Netflix",
+    "amount": 15.17,
+    "category": "Subscriptions",
+    "is_subscription": true
+  },
+  {
+    "id": 109,
+    "date": "2025-10-14",
+    "name": "Target",
+    "amount": 131.56,
+    "category": "Shopping",
+    "is_subscription": false
+  },
+  {
+    "id": 101,
+    "date": "2025-10-15",
+    "name": "Spotify",
+    "amount": 11.64,
+    "category": "Subscriptions",
+    "is_subscription": true
+  },
+  {
+    "id": 121,
+    "date": "2025-10-16",
+    "name": "Best Buy",
+    "amount": 466.7,
+    "category": "Electronics",
+    "is_subscription": false
+  },
+  {
+    "id": 50,
+    "date": "2025-10-17",
+    "name": "Lyft",
+    "amount": 21.54,
+    "category": "Transport",
+    "is_subscription": false
+  },
+  {
+    "id": 16,
+    "date": "2025-10-17",
+    "name": "Southwest Airlines",
+    "amount": 226.92,
+    "category": "Travel",
+    "is_subscription": false
+  },
+  {
+    "id": 20,
+    "date": "2025-10-17",
+    "name": "Starbucks",
+    "amount": 9.18,
+    "category": "Dining",
+    "is_subscription": false
+  },
+  {
+    "id": 119,
+    "date": "2025-10-17",
+    "name": "Uber",
+    "amount": 59.64,
+    "category": "Transport",
+    "is_subscription": false
+  },
+  {
+    "id": 58,
+    "date": "2025-10-18",
+    "name": "Gym Membership",
+    "amount": 61.99,
+    "category": "Fitness",
+    "is_subscription": true
+  },
+  {
+    "id": 102,
+    "date": "2025-10-18",
+    "name": "Lyft",
+    "amount": 17.94,
+    "category": "Transport",
+    "is_subscription": false
+  },
+  {
+    "id": 117,
+    "date": "2025-10-18",
+    "name": "Southwest Airlines",
+    "amount": 371.01,
+    "category": "Travel",
+    "is_subscription": false
+  },
+  {
+    "id": 38,
+    "date": "2025-10-19",
+    "name": "Costco",
+    "amount": 279.15,
+    "category": "Groceries",
+    "is_subscription": false
+  },
+  {
+    "id": 24,
+    "date": "2025-10-19",
+    "name": "Delta Airlines",
+    "amount": 615.39,
+    "category": "Travel",
+    "is_subscription": false
+  },
+  {
+    "id": 15,
+    "date": "2025-10-19",
+    "name": "Spotify",
+    "amount": 10.66,
+    "category": "Subscriptions",
+    "is_subscription": true
+  },
+  {
+    "id": 81,
+    "date": "2025-10-20",
+    "name": "Delta Airlines",
+    "amount": 587.67,
+    "category": "Travel",
+    "is_subscription": false
+  },
+  {
+    "id": 30,
+    "date": "2025-10-21",
+    "name": "Gym Membership",
+    "amount": 39.29,
+    "category": "Fitness",
+    "is_subscription": true
+  },
+  {
+    "id": 148,
+    "date": "2025-10-21",
+    "name": "Luxury Resort",
+    "amount": 3120.8,
+    "category": "Travel",
+    "is_subscription": false
+  },
+  {
+    "id": 122,
+    "date": "2025-10-23",
+    "name": "Costco",
+    "amount": 224.89,
+    "category": "Groceries",
+    "is_subscription": false
+  },
+  {
+    "id": 70,
+    "date": "2025-10-23",
+    "name": "Gym Membership",
+    "amount": 60.92,
+    "category": "Fitness",
+    "is_subscription": true
+  },
+  {
+    "id": 145,
+    "date": "2025-10-23",
+    "name": "Trader Joe's",
+    "amount": 71.28,
+    "category": "Groceries",
+    "is_subscription": false
+  },
+  {
+    "id": 37,
+    "date": "2025-10-25",
+    "name": "Costco",
+    "amount": 73.98,
+    "category": "Groceries",
+    "is_subscription": false
+  },
+  {
+    "id": 33,
+    "date": "2025-10-25",
+    "name": "Southwest Airlines",
+    "amount": 309.76,
+    "category": "Travel",
+    "is_subscription": false
+  },
+  {
+    "id": 74,
+    "date": "2025-10-25",
+    "name": "Starbucks",
+    "amount": 7.9,
+    "category": "Dining",
+    "is_subscription": false
+  },
+  {
+    "id": 4,
+    "date": "2025-10-25",
+    "name": "Uber",
+    "amount": 13.58,
+    "category": "Transport",
+    "is_subscription": false
+  },
+  {
+    "id": 118,
+    "date": "2025-10-26",
+    "name": "Amazon",
+    "amount": 28.37,
+    "category": "Shopping",
+    "is_subscription": false
+  },
+  {
+    "id": 137,
+    "date": "2025-10-26",
+    "name": "Shell",
+    "amount": 77.36,
+    "category": "Gas",
+    "is_subscription": false
+  },
+  {
+    "id": 141,
+    "date": "2025-10-26",
+    "name": "Whole Foods",
+    "amount": 99.99,
+    "category": "Groceries",
+    "is_subscription": false
+  },
+  {
+    "id": 114,
+    "date": "2025-10-27",
+    "name": "Best Buy",
+    "amount": 384.61,
+    "category": "Electronics",
+    "is_subscription": false
+  },
+  {
+    "id": 59,
+    "date": "2025-10-28",
+    "name": "Netflix",
+    "amount": 14.99,
+    "category": "Subscriptions",
+    "is_subscription": true
+  },
+  {
+    "id": 82,
+    "date": "2025-10-29",
+    "name": "Lyft",
+    "amount": 29.61,
+    "category": "Transport",
+    "is_subscription": false
+  },
+  {
+    "id": 129,
+    "date": "2025-10-29",
+    "name": "Shell",
+    "amount": 49.84,
+    "category": "Gas",
+    "is_subscription": false
+  },
+  {
+    "id": 128,
+    "date": "2025-10-31",
+    "name": "Apple",
+    "amount": 151.87,
+    "category": "Electronics",
+    "is_subscription": false
+  },
+  {
+    "id": 54,
+    "date": "2025-10-31",
+    "name": "Best Buy",
+    "amount": 135.96,
+    "category": "Electronics",
+    "is_subscription": false
+  },
+  {
+    "id": 68,
+    "date": "2025-10-31",
+    "name": "DoorDash",
+    "amount": 31.14,
+    "category": "Dining",
+    "is_subscription": false
+  },
+  {
+    "id": 87,
+    "date": "2025-11-01",
+    "name": "Adobe",
+    "amount": 61.78,
+    "category": "Software",
+    "is_subscription": true
+  },
+  {
+    "id": 79,
+    "date": "2025-11-01",
+    "name": "Target",
+    "amount": 159.02,
+    "category": "Shopping",
+    "is_subscription": false
+  },
+  {
+    "id": 45,
+    "date": "2025-11-04",
+    "name": "Netflix",
+    "amount": 17.48,
+    "category": "Subscriptions",
+    "is_subscription": true
+  },
+  {
+    "id": 149,
+    "date": "2025-11-05",
+    "name": "Designer Furniture",
+    "amount": 2750.0,
+    "category": "Home",
+    "is_subscription": false
+  },
+  {
+    "id": 133,
+    "date": "2025-11-05",
+    "name": "Home Depot",
+    "amount": 250.65,
+    "category": "Home",
+    "is_subscription": false
+  },
+  {
+    "id": 139,
+    "date": "2025-11-05",
+    "name": "Netflix",
+    "amount": 15.54,
+    "category": "Subscriptions",
+    "is_subscription": true
+  },
+  {
+    "id": 89,
+    "date": "2025-11-05",
+    "name": "Spotify",
+    "amount": 11.55,
+    "category": "Subscriptions",
+    "is_subscription": true
+  },
+  {
+    "id": 55,
+    "date": "2025-11-07",
+    "name": "Costco",
+    "amount": 153.09,
+    "category": "Groceries",
+    "is_subscription": false
+  },
+  {
+    "id": 39,
+    "date": "2025-11-07",
+    "name": "Delta Airlines",
+    "amount": 607.27,
+    "category": "Travel",
+    "is_subscription": false
+  },
+  {
+    "id": 88,
+    "date": "2025-11-07",
+    "name": "Starbucks",
+    "amount": 4.8,
+    "category": "Dining",
+    "is_subscription": false
+  },
+  {
+    "id": 104,
+    "date": "2025-11-07",
+    "name": "Whole Foods",
+    "amount": 118.48,
+    "category": "Groceries",
+    "is_subscription": false
+  },
+  {
+    "id": 53,
+    "date": "2025-11-08",
+    "name": "Amazon",
+    "amount": 45.68,
+    "category": "Shopping",
+    "is_subscription": false
+  },
+  {
+    "id": 23,
+    "date": "2025-11-08",
+    "name": "Apple",
+    "amount": 140.65,
+    "category": "Electronics",
+    "is_subscription": false
+  },
+  {
+    "id": 32,
+    "date": "2025-11-08",
+    "name": "Delta Airlines",
+    "amount": 508.69,
+    "category": "Travel",
+    "is_subscription": false
+  },
+  {
+    "id": 41,
+    "date": "2025-11-08",
+    "name": "Delta Airlines",
+    "amount": 518.18,
+    "category": "Travel",
+    "is_subscription": false
+  },
+  {
+    "id": 14,
+    "date": "2025-11-08",
+    "name": "Netflix",
+    "amount": 17.89,
+    "category": "Subscriptions",
+    "is_subscription": true
+  },
+  {
+    "id": 142,
+    "date": "2025-11-08",
+    "name": "Target",
+    "amount": 81.45,
+    "category": "Shopping",
+    "is_subscription": false
+  },
+  {
+    "id": 134,
+    "date": "2025-11-08",
+    "name": "Trader Joe's",
+    "amount": 133.01,
+    "category": "Groceries",
+    "is_subscription": false
+  },
+  {
+    "id": 48,
+    "date": "2025-11-09",
+    "name": "Adobe",
+    "amount": 61.74,
+    "category": "Software",
+    "is_subscription": true
+  },
+  {
+    "id": 7,
+    "date": "2025-11-09",
+    "name": "DoorDash",
+    "amount": 32.58,
+    "category": "Dining",
+    "is_subscription": false
+  },
+  {
+    "id": 103,
+    "date": "2025-11-09",
+    "name": "Lyft",
+    "amount": 37.91,
+    "category": "Transport",
+    "is_subscription": false
+  },
+  {
+    "id": 77,
+    "date": "2025-11-09",
+    "name": "Whole Foods",
+    "amount": 156.12,
+    "category": "Groceries",
+    "is_subscription": false
+  },
+  {
+    "id": 61,
+    "date": "2025-11-10",
+    "name": "Apple",
+    "amount": 272.42,
+    "category": "Electronics",
+    "is_subscription": false
+  },
+  {
+    "id": 105,
+    "date": "2025-11-10",
+    "name": "Lyft",
+    "amount": 52.0,
+    "category": "Transport",
+    "is_subscription": false
+  },
+  {
+    "id": 76,
+    "date": "2025-11-10",
+    "name": "Netflix",
+    "amount": 14.2,
+    "category": "Subscriptions",
+    "is_subscription": true
+  },
+  {
+    "id": 150,
+    "date": "2025-11-10",
+    "name": "Surgery Bill",
+    "amount": 4280.67,
+    "category": "Medical",
+    "is_subscription": false
+  },
+  {
+    "id": 25,
+    "date": "2025-11-11",
+    "name": "Apple",
+    "amount": 302.23,
+    "category": "Electronics",
+    "is_subscription": false
+  },
+  {
+    "id": 83,
+    "date": "2025-11-11",
+    "name": "Canva",
+    "amount": 12.93,
+    "category": "Software",
+    "is_subscription": true
+  },
+  {
+    "id": 115,
+    "date": "2025-11-11",
+    "name": "Whole Foods",
+    "amount": 48.98,
+    "category": "Groceries",
+    "is_subscription": false
+  },
+  {
+    "id": 92,
+    "date": "2025-11-12",
+    "name": "Apple",
+    "amount": 269.46,
+    "category": "Electronics",
+    "is_subscription": false
+  },
+  {
+    "id": 99,
+    "date": "2025-11-12",
+    "name": "Netflix",
+    "amount": 14.29,
+    "category": "Subscriptions",
+    "is_subscription": true
+  },
+  {
+    "id": 67,
+    "date": "2025-11-13",
+    "name": "Southwest Airlines",
+    "amount": 339.07,
+    "category": "Travel",
+    "is_subscription": false
+  },
+  {
+    "id": 140,
+    "date": "2025-11-13",
+    "name": "Target",
+    "amount": 64.48,
+    "category": "Shopping",
+    "is_subscription": false
+  },
+  {
+    "id": 85,
+    "date": "2025-11-14",
+    "name": "Best Buy",
+    "amount": 88.04,
+    "category": "Electronics",
+    "is_subscription": false
+  },
+  {
+    "id": 94,
+    "date": "2025-11-14",
+    "name": "Southwest Airlines",
+    "amount": 359.11,
+    "category": "Travel",
+    "is_subscription": false
+  },
+  {
+    "id": 8,
+    "date": "2025-11-15",
+    "name": "Delta Airlines",
+    "amount": 536.15,
+    "category": "Travel",
+    "is_subscription": false
+  }
+]

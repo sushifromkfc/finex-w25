@@ -1,3 +1,13 @@
+"use client";
+
+import { useState, type FormEvent, type ComponentProps } from "react";
+import { useRouter } from "next/navigation";
+import { auth } from "@/lib/firebaseClient";
+import {
+  createUserWithEmailAndPassword,
+  GoogleAuthProvider,
+  signInWithPopup,
+} from "firebase/auth";
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -15,6 +25,51 @@ import {
 import { Input } from "@/components/ui/input";
 
 export function SignupForm({ ...props }: React.ComponentProps<typeof Card>) {
+  const router = useRouter();
+  const [email, onChangeEmail] = useState("");
+  const [password, onChangePassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
+  const [error, setError] = useState<string | null>(null);
+  const provider = new GoogleAuthProvider();
+
+  function letSignUp(e: FormEvent<HTMLFormElement>) {
+    e.preventDefault();
+    setError(null);
+
+    if (password !== confirmPassword) {
+      setError("Password and confirm password do not match.");
+      return;
+    }
+
+    createUserWithEmailAndPassword(auth, email, password)
+      .then((userCredential) => {
+        const user = userCredential.user;
+        console.log(user);
+        router.push("/login");
+      })
+      .catch((error) => {
+        const errorMessage = error.message;
+        console.log(errorMessage);
+        setError(errorMessage);
+      });
+  }
+
+  function letGoogleSignUp() {
+    setError(null);
+
+    signInWithPopup(auth, provider)
+      .then((result) => {
+        const user = result.user;
+        console.log("google login good", user);
+        router.push("/dashboard");
+      })
+      .catch((error) => {
+        const errorMessage = error.message;
+        console.log(errorMessage);
+        setError(errorMessage);
+      });
+  }
+
   return (
     <Card {...props}>
       <CardHeader>
@@ -24,12 +79,8 @@ export function SignupForm({ ...props }: React.ComponentProps<typeof Card>) {
         </CardDescription>
       </CardHeader>
       <CardContent>
-        <form>
+        <form onSubmit={letSignUp}>
           <FieldGroup>
-            <Field>
-              <FieldLabel htmlFor="name">Full Name</FieldLabel>
-              <Input id="name" type="text" placeholder="John Doe" required />
-            </Field>
             <Field>
               <FieldLabel htmlFor="email">Email</FieldLabel>
               <Input
@@ -37,6 +88,8 @@ export function SignupForm({ ...props }: React.ComponentProps<typeof Card>) {
                 type="email"
                 placeholder="m@example.com"
                 required
+                value={email}
+                onChange={(e) => onChangeEmail(e.target.value)}
               />
               <FieldDescription>
                 We&apos;ll use this to contact you. We will not share your email
@@ -45,7 +98,13 @@ export function SignupForm({ ...props }: React.ComponentProps<typeof Card>) {
             </Field>
             <Field>
               <FieldLabel htmlFor="password">Password</FieldLabel>
-              <Input id="password" type="password" required />
+              <Input
+                id="password"
+                type="password"
+                required
+                value={password}
+                onChange={(e) => onChangePassword(e.target.value)}
+              />
               <FieldDescription>
                 Must be at least 8 characters long.
               </FieldDescription>
@@ -54,17 +113,41 @@ export function SignupForm({ ...props }: React.ComponentProps<typeof Card>) {
               <FieldLabel htmlFor="confirm-password">
                 Confirm Password
               </FieldLabel>
-              <Input id="confirm-password" type="password" required />
+              <Input
+                id="confirm-password"
+                type="password"
+                required
+                value={confirmPassword}
+                onChange={(e) => setConfirmPassword(e.target.value)}
+              />
               <FieldDescription>Please confirm your password.</FieldDescription>
             </Field>
+
+            {error && (
+              <p className="text-xs text-red-600 whitespace-pre-line">
+                {error}
+              </p>
+            )}
+
             <FieldGroup>
               <Field>
                 <Button type="submit">Create Account</Button>
-                <Button variant="outline" type="button">
+                <Button
+                  variant="outline"
+                  type="button"
+                  onClick={letGoogleSignUp}
+                >
                   Sign up with Google
                 </Button>
                 <FieldDescription className="px-6 text-center">
-                  Already have an account? <a href="#">Sign in</a>
+                  Already have an account?
+                  <Button
+                    variant="link"
+                    type="button"
+                    onClick={() => router.push("/login")}
+                  >
+                    Sign in
+                  </Button>
                 </FieldDescription>
               </Field>
             </FieldGroup>
