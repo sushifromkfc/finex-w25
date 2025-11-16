@@ -8,6 +8,9 @@ from app.services.transactions_service import (
 )
 from app.schemas.transactions import Transaction, TransactionCreate
 from app.notifications.transaction_email import send_transaction_email_summary
+from app.notifications.risk_flag_email import (
+    check_and_notify_large_transaction,
+)
 
 router = APIRouter(prefix="/transactions", tags=["transactions"])
 
@@ -26,6 +29,11 @@ def new_transaction(payload: TransactionCreate, background_tasks: BackgroundTask
         created = create_transaction(payload)
         background_tasks.add_task(
             send_transaction_email_summary,
+            payload.user_id,
+            created,
+        )
+        background_tasks.add_task(
+            check_and_notify_large_transaction,
             payload.user_id,
             created,
         )

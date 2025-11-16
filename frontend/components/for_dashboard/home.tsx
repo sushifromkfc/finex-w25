@@ -3,7 +3,13 @@
 import { useMemo } from "react";
 
 import AddTransactionForm from "@/components/forms/add-transaction-form";
-import { Budget, Insight, RiskFlag, Transaction, UserProfile } from "@/lib/types";
+import {
+  Budget,
+  Insight,
+  RiskFlag,
+  Transaction,
+  UserProfile,
+} from "@/lib/types";
 
 interface Props {
   user: UserProfile | null;
@@ -42,12 +48,15 @@ export default function Home({
   const dateLabel = (value?: string) => {
     const { month, day, year } = dateParts(value);
     if (!month || !day || !year) return "--";
-    return new Date(Date.UTC(year, month - 1, day)).toLocaleDateString(undefined, {
-      month: "short",
-      day: "2-digit",
-      year: "numeric",
-      timeZone: "UTC",
-    });
+    return new Date(Date.UTC(year, month - 1, day)).toLocaleDateString(
+      undefined,
+      {
+        month: "short",
+        day: "2-digit",
+        year: "numeric",
+        timeZone: "UTC",
+      }
+    );
   };
 
   const dateComparable = (value?: string) => {
@@ -78,16 +87,27 @@ export default function Home({
     ? Math.max(((totalBudget - spentThisMonth) / totalBudget) * 100, 0)
     : null;
 
-  const activeSubscriptions = transactions.filter((tx) => tx.is_subscription)
-    .length;
+  const activeSubscriptions = transactions.filter(
+    (tx) => tx.is_subscription
+  ).length;
 
   const recentTransactions = useMemo(() => {
     return [...transactions]
-      .sort(
-        (a, b) => dateComparable(b.date) - dateComparable(a.date)
-      )
+      .sort((a, b) => dateComparable(b.date) - dateComparable(a.date))
       .slice(0, 6);
   }, [transactions]);
+
+  const budgetUsagePercent = useMemo(() => {
+    if (!totalBudget) return 0;
+    const used = spentThisMonth / totalBudget;
+    return Math.min(Math.max(used * 100, 0), 100); // 0~100
+  }, [spentThisMonth, totalBudget]);
+
+  const usageColor = useMemo(() => {
+    if (budgetUsagePercent >= 80) return "bg-rose-500";
+    if (budgetUsagePercent >= 50) return "bg-amber-400";
+    return "bg-emerald-500";
+  }, [budgetUsagePercent]);
 
   const latestInsight = insights[0];
   const highlightFlags = riskFlags.slice(0, 3);
@@ -117,20 +137,30 @@ export default function Home({
             <p className="text-xs text-slate-500">Budget remaining vs spend</p>
             <p className="text-3xl font-semibold mt-1 text-slate-900">
               ${budgetRemaining.toFixed(2)}
-              <span className="text-base text-slate-500"> / ${spentThisMonth.toFixed(2)}</span>
+              <span className="text-base text-slate-500">
+                {" "}
+                / ${spentThisMonth.toFixed(2)}
+              </span>
             </p>
             <p className="text-xs text-emerald-500 mt-1">
-              {budgetRemaining > 0
-                ? "On track"
-                : "Budget exceeded"}
+              <div className="mt-3">
+                <div className="h-2 w-full rounded-full bg-slate-200 overflow-hidden">
+                  <div
+                    className={`h-full transition-all duration-700 ease-out ${usageColor}`}
+                    style={{ width: `${budgetUsagePercent}%` }}
+                  />
+                </div>
+                <p className="text-xs text-slate-500 mt-1">
+                  {budgetUsagePercent.toFixed(0)}% used
+                </p>
+              </div>
+              {budgetRemaining > 0 ? "On track" : "Budget exceeded"}
             </p>
           </div>
         </div>
       </div>
 
-      {loading && (
-        <p className="text-sm text-slate-500">Loading live data…</p>
-      )}
+      {loading && <p className="text-sm text-slate-500">Loading live data…</p>}
       {error && (
         <p className="text-sm text-rose-500">Failed to load data: {error}</p>
       )}
@@ -151,7 +181,11 @@ export default function Home({
         <MetricCard
           label="Active subscriptions"
           value={`${activeSubscriptions}`}
-          sub={activeSubscriptions ? "Tracked from transactions" : "Add recurring spend"}
+          sub={
+            activeSubscriptions
+              ? "Tracked from transactions"
+              : "Add recurring spend"
+          }
           tone="amber"
         />
       </div>
