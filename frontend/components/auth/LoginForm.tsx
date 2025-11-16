@@ -7,6 +7,7 @@ import {
   signInWithEmailAndPassword,
   GoogleAuthProvider,
   signInWithPopup,
+  sendPasswordResetEmail,
 } from "firebase/auth";
 import { Button } from "@/components/ui/button";
 import {
@@ -18,6 +19,16 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
+import { toast } from "sonner";
+import {
+  Dialog,
+  DialogClose,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+} from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { motion } from "framer-motion";
@@ -26,12 +37,12 @@ export default function LoginForm() {
   const router = useRouter();
   const [email, onChangeEmail] = useState("");
   const [password, onChangePassword] = useState("");
-  const [error, setError] = useState<string | null>(null);
   const provider = new GoogleAuthProvider();
+  const [open, setOpen] = useState(false);
+  const [resetEmail, setResetEmail] = useState("");
 
   function letLogin(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
-    setError(null);
 
     signInWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
@@ -42,13 +53,13 @@ export default function LoginForm() {
       .catch((error) => {
         const errorMessage = error.message;
         console.log(errorMessage);
-        setError(errorMessage);
+        toast.error("Login failed", {
+          description: errorMessage,
+        });
       });
   }
 
   function letGoogleLogin() {
-    setError(null);
-
     signInWithPopup(auth, provider)
       .then((result) => {
         const user = result.user;
@@ -58,13 +69,35 @@ export default function LoginForm() {
       .catch((error) => {
         const errorMessage = error.message;
         console.log(errorMessage);
-        setError(errorMessage);
+        toast.error("Google login failed", {
+          description: errorMessage,
+        });
+      });
+  }
+
+  function resetPassword() {
+    if (!resetEmail) {
+      const msg = "Please enter your email first.";
+      toast.error("Reset failed", { description: msg });
+      return;
+    }
+
+    sendPasswordResetEmail(auth, resetEmail)
+      .then(() => {
+        console.log("Email sent!");
+        setOpen(false);
+      })
+      .catch((error) => {
+        const errorMessage = error.message;
+        console.log(errorMessage);
+        toast.error("Login failed", {
+          description: errorMessage,
+        });
       });
   }
 
   return (
     <div className="relative min-h-screen flex items-center justify-center overflow-hidden bg-gradient-to-br from-sky-100 via-slate-50 to-indigo-100 px-4">
-      {/* 배경 데코 */}
       <div className="pointer-events-none absolute -left-24 top-0 h-72 w-72 bg-sky-200/70 blur-3xl rounded-full" />
       <div className="pointer-events-none absolute -right-24 bottom-0 h-80 w-80 bg-indigo-200/70 blur-3xl rounded-full" />
 
@@ -112,12 +145,16 @@ export default function LoginForm() {
                 <div className="grid gap-2">
                   <div className="flex items-center">
                     <Label htmlFor="password">Password</Label>
-                    <a
-                      href="#"
+                    <button
+                      type="button"
                       className="ml-auto text-sm underline-offset-4 hover:underline"
+                      onClick={() => {
+                        setResetEmail(email);
+                        setOpen(true);
+                      }}
                     >
                       Forgot your password?
-                    </a>
+                    </button>
                   </div>
                   <Input
                     id="password"
@@ -128,16 +165,6 @@ export default function LoginForm() {
                     className="h-10 bg-white/70 border-slate-200 focus-visible:ring-sky-400"
                   />
                 </div>
-
-                {error && (
-                  <motion.p
-                    initial={{ opacity: 0, y: -4 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    className="text-xs text-red-600 whitespace-pre-line"
-                  >
-                    {error}
-                  </motion.p>
-                )}
 
                 <Button
                   type="submit"
@@ -158,6 +185,68 @@ export default function LoginForm() {
             >
               Login with Google
             </Button>
+
+            <Dialog open={open} onOpenChange={setOpen}>
+              <DialogContent
+                className="
+                  sm:max-w-[380px]
+                  border-white/60
+                  bg-white/80
+                  backdrop-blur-2xl
+                  shadow-2xl
+                  rounded-2xl
+                  px-6
+                  py-5
+                "
+              >
+                <DialogHeader className="space-y-1">
+                  <DialogTitle className="text-lg">Reset password</DialogTitle>
+                  <DialogDescription className="text-sm">
+                    Enter your email to receive a password reset link.
+                  </DialogDescription>
+                </DialogHeader>
+
+                <form
+                  className="mt-4 grid gap-5"
+                  onSubmit={(e) => {
+                    e.preventDefault();
+                    resetPassword();
+                  }}
+                >
+                  <div className="grid gap-2">
+                    <Label htmlFor="reset-email" className="text-sm">
+                      Email
+                    </Label>
+                    <Input
+                      id="reset-email"
+                      type="email"
+                      value={resetEmail}
+                      onChange={(e) => setResetEmail(e.target.value)}
+                      placeholder="m@example.com"
+                      className="h-10 bg-white/70 border-slate-200 focus-visible:ring-sky-400"
+                    />
+                  </div>
+
+                  <DialogFooter className="mt-2 flex gap-2 justify-end">
+                    <DialogClose asChild>
+                      <Button
+                        variant="outline"
+                        type="button"
+                        className="rounded-full border-slate-200"
+                      >
+                        Cancel
+                      </Button>
+                    </DialogClose>
+                    <Button
+                      type="submit"
+                      className="rounded-full bg-gradient-to-r from-sky-500 to-indigo-500 text-white shadow-md hover:shadow-lg"
+                    >
+                      Send reset link
+                    </Button>
+                  </DialogFooter>
+                </form>
+              </DialogContent>
+            </Dialog>
           </CardFooter>
         </Card>
       </motion.div>
