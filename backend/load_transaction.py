@@ -6,7 +6,7 @@ from app.database import supabase
 
 USER_ID = UUID("d09097f8-5bc4-438f-82c3-7065c5f2f9ca")
 
-with open("backend/sample_transactions.json") as fh:
+with open("sample_transactions.json") as fh:
     rows = json.load(fh)
 
 payload = []

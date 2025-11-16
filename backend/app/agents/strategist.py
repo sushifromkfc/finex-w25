@@ -1,4 +1,4 @@
-from datetime import datetime
+from datetime import datetime, timedelta, date
 from textwrap import dedent
 from uuid import UUID
 
@@ -10,7 +10,6 @@ from app.agents.gemini_client import run_gemini
 from app.agents.logger import log_agent_event
 from app.integrations.email_client import send_email
 from app.schemas.insights import InsightCreate
-
 
 
 class StrategistAgent:
@@ -71,11 +70,14 @@ Generate one short, friendly, helpful financial advice sentence.
         created = create_insight(payload)
         return {"message": "Realtime advice stored.", "insight": created}
 
-
     @staticmethod
     def run_weekly(user_id: UUID):
         """
         Weekly financial advice: compares spending trends and budget.
+
+        Assumes this is called on *Monday at 00:00*.
+        It will summarize the week that JUST FINISHED:
+        last Monday (inclusive) -> last Sunday (inclusive).
         """
 
         transactions = get_transactions(user_id)
@@ -86,16 +88,68 @@ Generate one short, friendly, helpful financial advice sentence.
 
         total_budget = sum(b["monthly_limit"] for b in budgets)
 
-        spent_this_month = sum(
-            t["amount"] for t in transactions
-            if t["date"].startswith(datetime.now().strftime("%Y-%m"))
+        now = datetime.now()
+        today: date = now.date()
+
+        # Monday of the CURRENT week (the one that just started)
+        this_monday: date = today - timedelta(days=today.weekday())
+        # Monday of the PREVIOUS week
+        last_monday: date = this_monday - timedelta(days=7)
+        # Sunday of the previous week
+        last_sunday: date = this_monday - timedelta(days=1)
+
+        # Time window: [last_monday, this_monday)
+        start_of_week = last_monday
+        exclusive_end = this_monday
+
+        week_label = (
+            f"Week of {last_monday.strftime('%b %d')} – "
+            f"{last_sunday.strftime('%b %d')} (7-day recap)"
         )
 
-        prompt = f"""
-User spent ${spent_this_month} so far this month.
-User monthly budget: ${total_budget}.
+        def _to_date(raw_date):
+            """
+            Convert various date representations into a date object.
+            Supports:
+            - date
+            - datetime
+            - ISO strings "YYYY-MM-DD" or "YYYY-MM-DDTHH:MM:SS"
+            """
+            if isinstance(raw_date, date) and not isinstance(raw_date, datetime):
+                return raw_date
+            if isinstance(raw_date, datetime):
+                return raw_date.date()
 
-Provide friendly, positive weekly financial advice (1-2 sentences).
+            s = str(raw_date)
+            try:
+                if "T" in s:
+                    return datetime.fromisoformat(s).date()
+                # plain date
+                return datetime.strptime(s, "%Y-%m-%d").date()
+            except ValueError:
+                # best effort: try fromisoformat as fallback
+                try:
+                    return datetime.fromisoformat(s).date()
+                except Exception:
+                    return None
+
+        week_transactions = []
+        for t in transactions:
+            tx_date = _to_date(t.get("date"))
+            if tx_date is None:
+                continue
+            if start_of_week <= tx_date < exclusive_end:
+                week_transactions.append(t)
+
+        spent_this_week = sum(t["amount"] for t in week_transactions)
+
+        prompt = f"""
+Summarize the user's spending for {week_label} only.
+
+Total budget (monthly context): ${total_budget}
+Spent during {week_label}: ${spent_this_week}
+
+Give a short, encouraging weekly tip (1-2 sentences) referencing this week's activity only.
 """
 
         advice = run_gemini(prompt)
@@ -110,6 +164,7 @@ Provide friendly, positive weekly financial advice (1-2 sentences).
 
         created = create_insight(payload)
 
+        # --- Email sending ---
         user_email = None
         user_name = "there"
         user_error = None
@@ -134,9 +189,9 @@ Provide friendly, positive weekly financial advice (1-2 sentences).
                 f"""
                 Hi {user_name},
 
-                Here's your latest Finex summary:
-                - Monthly budget: ${total_budget:,.2f}
-                - Spent so far: ${spent_this_month:,.2f}
+                Here's your {week_label} Finex summary:
+                - Monthly budget (for context): ${total_budget:,.2f}
+                - Spent this week: ${spent_this_week:,.2f}
 
                 Insight:
                 {advice}
@@ -148,18 +203,33 @@ Provide friendly, positive weekly financial advice (1-2 sentences).
             sent, error = send_email(user_email, subject, body)
             email_status = {"sent": sent, "error": error}
 
+        # --- Logging ---
         log_agent_event(
             user_id,
             "Strategist",
             input_data={
                 "stage": "weekly",
-                "spent_this_month": spent_this_month,
+                "spent_this_week": spent_this_week,
                 "total_budget": total_budget,
             },
-            output_data={"insight": created, "email_status": email_status},
+            output_data={
+                "insight": created,
+                "email_status": email_status,
+                "week": {
+                    "label": week_label,
+                    "start": start_of_week.isoformat(),
+                    "end": last_sunday.isoformat(),
+                },
+            },
         )
+
         return {
             "message": "Weekly insight stored.",
             "insight": created,
             "email_status": email_status,
+            "week": {
+                "label": week_label,
+                "start": start_of_week.isoformat(),
+                "end": last_sunday.isoformat(),
+            },
         }
