@@ -60,19 +60,19 @@ export default function NavigationMenuDemo({
       />
 
       <IconButton
-        src="/calendar.svg"
+        src="/calendar_n.svg"
         alt="Calendar"
         onClick={() => setActiveTab("calendar")}
       />
 
       <IconButton
-        src="/stat.jpg"
+        src="/stat_n.png"
         alt="Statistics"
         onClick={() => setActiveTab("statistics")}
       />
 
       <IconButton
-        src="/profile.jpg"
+        src="/profile_n.png"
         alt="Profile"
         onClick={() => setActiveTab("profile")}
       />
