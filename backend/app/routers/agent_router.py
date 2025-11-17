@@ -4,7 +4,7 @@ from uuid import UUID
 from app.agents.pipeline import run_pipeline
 from app.agents.strategist import StrategistAgent
 
-router = APIRouter(prefix="/agent", tags=["agent"])
+router = APIRouter(tags=["agent"])
 
 
 @router.post("/run/{user_id}")

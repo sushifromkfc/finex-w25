@@ -47,4 +47,5 @@ app.include_router(risk_flags_router)
 app.include_router(insights_router)
 app.include_router(action_plans_router)
 app.include_router(agent_logs_router)
-app.include_router(agent_router)
+app.include_router(agent_router, prefix="/agent")
+app.include_router(agent_router, prefix="/agents")  # plural alias expected by frontend
